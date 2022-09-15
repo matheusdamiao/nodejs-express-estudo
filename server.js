@@ -10,6 +10,7 @@ mongoose.connect(process.env.connectionString)
         console.log('Conectado à base de dados')
         app.emit('Done')
     })
+    .catch( e => console.log(e))
 
 
 
