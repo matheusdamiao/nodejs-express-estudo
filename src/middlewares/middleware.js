@@ -1,4 +1,4 @@
-module.exports = (req, res, next) =>{
-    console.log('passando pelo middleware e testando')
+exports.middle = (req, res, next) =>{
+    console.log('testando meu middleware')
     next();
 };
