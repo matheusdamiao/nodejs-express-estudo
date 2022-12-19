@@ -1,25 +1,43 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+    <%- include('head') %>
+    <%- include('nav') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Modelo</title>
-</head>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 my-5">
+                <h1 class="text-center"> Agenda de contatos</h1>
+                <p class="text-center lead"> Seus clientes estão abaixo</p>
 
-<body>
+                <div class="row">
+                    <div class="col my-3">
+                        <div class="alert alert-danger">Um erro qualquer</div>
+                    </div>
+                </div>
 
-  <section class="container">
-    <h1>Lorem ipsum dolor sit amet</h1>
-    <form action="/" method="POST">
-      <label>Nome</label>
-      <input type="text" name="nome">
-      <button>Submit</button>
-    </form>
-  </section>
-
-  <script src="./assets/js/bundle.js"></script>
-</body>
-
-</html>
+                <div class="responsive-table">
+                    <table class="table my-3">
+                        <tr>
+                            <td>Matheus</td>
+                            <td>Damião</td>
+                            <td>92323-2329</td>
+                            <td>matheus.damiaoliveira@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td>Matheus</td>
+                            <td>Damião</td>
+                            <td>92323-2329</td>
+                            <td>matheus.damiaoliveira@gmail.com</td>
+                        </tr> <tr>
+                            <td>Matheus</td>
+                            <td>Damião</td>
+                            <td>92323-2329</td>
+                            <td>matheus.damiaoliveira@gmail.com</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    <%- include('footer') %>
+  

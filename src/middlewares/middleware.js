@@ -1,4 +1,6 @@
-exports.middle = (req, res, next) =>{
-    console.log('testando meu middleware')
-    next();
+exports.middle = (err, req, res, next) => {
+  if (err) {
+    return res.render("404");
+  }
+  next();
 };
