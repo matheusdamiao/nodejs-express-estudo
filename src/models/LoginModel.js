@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcryptjs = require("bcryptjs");
 
 const LoginSchema = new mongoose.Schema({
   email: { type: String, required: true },
-  senha: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
 const LoginModel = mongoose.model("Login", LoginSchema);
@@ -15,20 +16,55 @@ class Login {
     this.user = null;
   }
 
-  register() {
+  async login() {
     this.valida();
-    if (this.errors > 0) return;
+    if (this.errors.length > 0) return;
+
+    this.user = await LoginModel.findOne({ email: this.body.email });
+    if (!this.user) {
+      this.errors.push("Usuário não encontrado");
+      return;
+    }
+    if (this.errors.length > 0) return;
+
+    if (!bcryptjs.compareSync(this.body.password, this.user.password)) {
+      this.errors.push("Senha inválida");
+      this.user = null;
+      return;
+    }
+  }
+
+  async register() {
+    this.valida();
+    if (this.errors.length > 0) return;
+
+    await this.userExists();
+
+    if (this.errors.length > 0) return;
+    // use bcryptjs library to hash user password
+    const salt = bcryptjs.genSaltSync();
+    this.body.password = bcryptjs.hashSync(this.body.password, salt);
+
+    this.user = await LoginModel.create(this.body);
+  }
+
+  async userExists() {
+    const user = await LoginModel.findOne({ email: this.body.email });
+    if (user) {
+      this.errors.push("Usuário já existe");
+    }
   }
 
   valida() {
     this.cleanUp();
     // valida o email
     if (!validator.isEmail(this.body.email))
-      this.errors.push("E-mail inválido");
+      return this.errors.push("E-mail inválido");
     // valida a senha
     if (this.body.password.length < 3 || this.body.password.length > 50) {
-      this.errors.push("A senha precisa ter entre 3 e 50 caracteres");
+      return this.errors.push("A senha precisa ter entre 3 e 50 caracteres");
     }
+    return;
   }
 
   cleanUp() {

@@ -8,12 +8,15 @@
                 <h1 class="text-center"> Login </h1>
                 <p class="text-center lead"> Acesse sua conta ou crie uma nova</p>
 
+
+                <%- include('messages') %>
+                
                 <div class="row">
 
                     <div class="div col-lg">
                         <h4>Faça seu cadastro</h4>
                         <p>Se você ainda não tem conta, preencha seus dados:</p>
-
+ 
                         <form action="/login/register" method="POST">
                             <div class="form-group">
                             <label>E-mail</label>

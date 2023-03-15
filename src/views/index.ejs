@@ -8,33 +8,27 @@
                 <h1 class="text-center"> Agenda de contatos</h1>
                 <p class="text-center lead"> Seus clientes estão abaixo</p>
 
-                <div class="row">
-                    <div class="col my-3">
-                        <div class="alert alert-danger">Um erro qualquer</div>
-                    </div>
-                </div>
+                <%- include('messages') %>
 
+                <% if(contatos.length > 0) { %>
                 <div class="responsive-table">
                     <table class="table my-3">
-                        <tr>
-                            <td>Matheus</td>
-                            <td>Damião</td>
-                            <td>92323-2329</td>
-                            <td>matheus.damiaoliveira@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td>Matheus</td>
-                            <td>Damião</td>
-                            <td>92323-2329</td>
-                            <td>matheus.damiaoliveira@gmail.com</td>
-                        </tr> <tr>
-                            <td>Matheus</td>
-                            <td>Damião</td>
-                            <td>92323-2329</td>
-                            <td>matheus.damiaoliveira@gmail.com</td>
-                        </tr>
+                        <% contatos.forEach( contato => { %>
+                            <tr>
+                                <td><%= contato.nome %></td>
+                                <td><%= contato.sobrenome %></td>
+                                <td><%= contato.telefone %></td>
+                                <td><%= contato.email %></td>
+                                <td><a href="/contato/index/<%= contato._id %>"> Editar</a></td>
+                                <td><a class="text-danger" href="/contato/delete/<%= contato._id %>"> Delete</a></td>
+
+                            </tr>
+                        <%  })  %>                        
                     </table>
                 </div>
+                <% } else { %> 
+                    <p class="text-center lead"> Não há contatos cadastrados.</p>
+                <% } %>
             </div>
             <div class="col-lg-2"></div>
         </div>
